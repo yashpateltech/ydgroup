@@ -8,36 +8,28 @@ import {
 export default function FAQ() {
   const faqs = [
     {
-      q: "Where can I read the details of the YDGROUPS free account and pay-as-you-go pricing?",
-      a: "You can find detailed pricing information on our pricing page, which breaks down costs for each service and explains the benefits of the free account."
+      q: "How does YDGROUPS ensure business growth?",
+      a: "We combine expert groups with deep industry experience to skyrocket your solutions. Our partnerships with big companies allow us to bring enterprise-grade expertise to every project."
     },
     {
-      q: "What does it cost to start?",
-      a: "Starting with a YDGROUPS free account costs nothing. You get USD 200 credit to explore any service for 30 days, plus many services that are free for 12 months or always free."
+      q: "What services are included in the initial consultation?",
+      a: "Our initial consultation covers a full audit of your current digital presence, identifying opportunities in SEO, AI automation, and web performance to build a custom growth roadmap."
     },
     {
-      q: "How do I get free services?",
-      a: "Simply sign up for a YDGROUPS account. New customers automatically receive the free services and credit upon identity verification."
+      q: "Do you handle custom software development?",
+      a: "Yes, we specialize in full-stack development, ERP systems, and CRM software tailored to your specific business workflows."
     },
     {
-      q: "How do free services work with pay-as-you-go pricing?",
-      a: "With pay-as-you-go, you only pay for what you use beyond the free monthly amounts. There are no upfront costs or termination fees."
-    },
-    {
-      q: "Can the YDGROUPS free account be used for production or only for development?",
-      a: "The free account is ideal for both development and small-scale production testing. As your needs grow, you can seamlessly transition to pay-as-you-go."
+      q: "How do I start a project with YDGROUPS?",
+      a: "Simply fill out our enquiry form with your project details and budget. Our team will review your requirements and schedule a discovery call within 24 hours."
     }
   ];
 
   return (
-    <section className="py-16 bg-white">
+    <section id="about" className="py-20 bg-white">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-3xl font-bold text-gray-900">Frequently asked questions</h2>
-          <div className="flex gap-4">
-            <button className="text-sm font-medium text-[#0078d4] hover:underline">Expand all</button>
-            <button className="text-sm font-medium text-[#0078d4] hover:underline">Collapse all</button>
-          </div>
         </div>
 
         <Accordion type="single" collapsible className="w-full border-t">

@@ -13,18 +13,22 @@ export default function Hero() {
             className="max-w-2xl"
           >
             <h1 className="mb-6 text-4xl font-bold tracking-tight text-gray-900 md:text-6xl">
-              Build in the cloud with a YDGROUPS account
+              Skyrocket Your Solutions with YDGROUPS
             </h1>
-            <p className="mb-8 text-lg text-gray-600">
-              Get started creating, deploying, and managing applications—across multiple clouds, on-premises, and at the edge—with scalable and cost-efficient services.
+            <p className="mb-8 text-lg text-gray-600 italic">
+              "A group who have groups of true expert and parting with big company that experience can sky rock your solution can bring too much growth"
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button className="bg-[#0078d4] hover:bg-[#005a9e] text-white px-8 py-6 text-lg">
-                Try YDGROUPS for free
-              </Button>
-              <Button variant="outline" className="px-8 py-6 text-lg border-gray-300">
-                Pay as you go
-              </Button>
+              <a href="#contact">
+                <Button className="bg-[#0078d4] hover:bg-[#005a9e] text-white px-8 py-6 text-lg">
+                  Start Your Growth Journey
+                </Button>
+              </a>
+              <a href="#services">
+                <Button variant="outline" className="px-8 py-6 text-lg border-gray-300">
+                  Explore Services
+                </Button>
+              </a>
             </div>
           </motion.div>
           <motion.div
@@ -35,8 +39,8 @@ export default function Hero() {
           >
             <div className="rounded-lg shadow-2xl overflow-hidden border border-gray-200 bg-white">
               <img
-                src="https://picsum.photos/seed/cloud/800/500"
-                alt="Cloud Dashboard"
+                src="https://picsum.photos/seed/growth/800/500"
+                alt="Business Growth"
                 className="w-full object-cover"
                 referrerPolicy="no-referrer"
               />
