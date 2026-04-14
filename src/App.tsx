@@ -5,9 +5,11 @@
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import Pricing from "./components/Pricing";
 import Solutions from "./components/Solutions";
-import ContactForm from "./components/ContactForm";
+import FreeProducts from "./components/FreeProducts";
 import FAQ from "./components/FAQ";
+import Locations from "./components/Locations";
 import Footer from "./components/Footer";
 
 export default function App() {
@@ -16,14 +18,15 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
+        <Pricing />
         <Solutions />
-        <ContactForm />
+        <FreeProducts />
         <FAQ />
+        <Locations />
       </main>
       <Footer />
     </div>
   );
 }
-
 
 
