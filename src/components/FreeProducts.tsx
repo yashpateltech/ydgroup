@@ -8,7 +8,8 @@ import {
   Settings, 
   MessageSquare,
   Search,
-  Code
+  Code,
+  User
 } from "lucide-react";
 
 export default function FreeProducts() {
@@ -20,9 +21,9 @@ export default function FreeProducts() {
     { name: "App Development", icon: Code, desc: "Custom software and mobile applications." },
     { name: "ERP Solutions", icon: Settings, desc: "Integrated management of core business processes." },
     { name: "CRM Software", icon: User, desc: "Manage your customer relationships effectively." },
-    { name: "Microsoft Cloud", icon: Cloud, desc: "Scalable cloud infrastructure and services." },
-    { name: "SharePoint", icon: Shield, desc: "Collaborative document management and storage." },
-    { name: "Azure DevOps", icon: Settings, desc: "5 users with unlimited private Git repos" },
+    { name: "Enterprise Cloud", icon: Cloud, desc: "Scalable cloud infrastructure and services." },
+    { name: "Collaboration Portals", icon: Shield, desc: "Collaborative document management and storage." },
+    { name: "Cloud DevOps", icon: Settings, desc: "5 users with unlimited private Git repos" },
     { name: "SQL Database", icon: Database, desc: "100,000 vCore seconds of serverless usage" },
     { name: "Document Intelligence", icon: BarChart3, desc: "500 pages per month free" }
   ];
@@ -55,23 +56,5 @@ export default function FreeProducts() {
         </div>
       </div>
     </section>
-  );
-}
-
-// Simple User icon fallback since it wasn't imported
-function User({ className }: { className?: string }) {
-  return (
-    <svg 
-      className={className} 
-      viewBox="0 0 24 24" 
-      fill="none" 
-      stroke="currentColor" 
-      strokeWidth="2" 
-      strokeLinecap="round" 
-      strokeLinejoin="round"
-    >
-      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-      <circle cx="12" cy="7" r="4" />
-    </svg>
   );
 }

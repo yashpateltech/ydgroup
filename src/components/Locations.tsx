@@ -12,7 +12,7 @@ export default function Locations() {
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Is YDGROUPS available in my location?</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            YDGROUPS is commercially available in 140 countries and regions, including those listed below. Azure free account, free services, and USD 200 credit don't include sovereign cloud products in US Government, Azure China, and Azure Germany regions.
+            YDGROUPS is commercially available in 140 countries and regions, including those listed below. YDGROUPS free account, free services, and USD 200 credit don't include sovereign cloud products in specific government and restricted regions.
           </p>
         </div>
 

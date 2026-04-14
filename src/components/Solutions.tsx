@@ -49,12 +49,12 @@ export default function Solutions() {
       features: ["Lead Tracking", "Customer Support Portals", "Sales Automation", "Analytics Dashboards"]
     },
     {
-      title: "Microsoft Cloud",
+      title: "Enterprise Cloud",
       icon: Cloud,
-      features: ["Azure Infrastructure", "Cloud Migration", "Security & Compliance", "Serverless Computing"]
+      features: ["Cloud Infrastructure", "Cloud Migration", "Security & Compliance", "Serverless Computing"]
     },
     {
-      title: "SharePoint",
+      title: "Collaboration Portals",
       icon: Share2,
       features: ["Intranet Portals", "Document Collaboration", "Workflow Automation", "Enterprise Search"]
     }

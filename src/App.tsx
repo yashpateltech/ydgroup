@@ -1,32 +1,35 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
+import { Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Pricing from "./components/Pricing";
-import Solutions from "./components/Solutions";
-import FreeProducts from "./components/FreeProducts";
-import FAQ from "./components/FAQ";
-import Locations from "./components/Locations";
 import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import ServicePage from "./pages/ServicePage";
 
 export default function App() {
+  const { pathname, hash } = useLocation();
+
+  // Handle scroll to top or hash on route change
+  useEffect(() => {
+    if (hash) {
+      const element = document.getElementById(hash.replace("#", ""));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
+
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-blue-100 selection:text-blue-900">
       <Navbar />
       <main>
-        <Hero />
-        <Pricing />
-        <Solutions />
-        <FreeProducts />
-        <FAQ />
-        <Locations />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/services/:id" element={<ServicePage />} />
+        </Routes>
       </main>
       <Footer />
     </div>
   );
 }
-
-

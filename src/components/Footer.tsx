@@ -1,83 +1,103 @@
-import { Globe, Facebook, Twitter, Linkedin, Youtube } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Globe, Facebook, Twitter, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react";
 
 export default function Footer() {
-  const links = [
-    {
-      title: "Explore Azure",
-      items: ["What is Azure?", "Get started with Azure", "Global infrastructure", "Datacenter regions", "Trust your cloud", "Azure Essentials", "Customer stories"]
-    },
-    {
-      title: "Products and pricing",
-      items: ["Products", "Azure pricing", "Free Azure services", "Flexible purchase options", "FinOps on Azure", "Maximize ROI from AI"]
-    },
-    {
-      title: "Solutions and support",
-      items: ["Solutions", "Resources for accelerating growth", "Solution architectures", "Support", "Azure demo and live Q&A"]
-    },
-    {
-      title: "Partners",
-      items: ["Software Development Companies", "Microsoft Marketplace", "Find a partner"]
-    },
-    {
-      title: "Resources",
-      items: ["Documentation", "Blog", "Developer resources", "Students", "Events and Webinars", "Analyst reports, white papers, and e-books", "Videos"]
-    },
-    {
-      title: "Cloud computing",
-      items: ["What is cloud computing?", "What is hybrid cloud?", "What is multi-cloud?", "What is machine learning?", "What is deep learning?", "What is AIaaS?", "What is a container?", "What is RAG?"]
-    }
+  const serviceLinks = [
+    { name: "Digital Marketing", path: "/services/digital-marketing" },
+    { name: "AI & Machine Learning", path: "/services/ai-ml" },
+    { name: "SEO Services", path: "/services/seo" },
+    { name: "Web Design", path: "/services/web-design" },
+    { name: "Software Development", path: "/services/software-development" },
+    { name: "ERP Solutions", path: "/services/erp" },
+    { name: "CRM Solutions", path: "/services/crm" },
+    { name: "Microsoft Cloud", path: "/services/microsoft-cloud" },
+    { name: "SharePoint", path: "/services/sharepoint" }
+  ];
+
+  const companyLinks = [
+    { name: "About Us", path: "/#about" },
+    { name: "Our Process", path: "/#process" },
+    { name: "Case Studies", path: "/#case-studies" },
+    { name: "Testimonials", path: "/#testimonials" },
+    { name: "Careers", path: "#" },
+    { name: "Contact", path: "/#contact" }
   ];
 
   return (
-    <footer className="bg-[#f2f2f2] pt-16 pb-8 border-t">
+    <footer className="bg-gray-900 text-gray-300 pt-20 pb-10 border-t border-gray-800">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-12">
-          {links.map((section, i) => (
-            <div key={i}>
-              <h4 className="font-bold text-gray-900 text-sm mb-4">{section.title}</h4>
-              <ul className="space-y-2">
-                {section.items.map((item, j) => (
-                  <li key={j}>
-                    <a href="#" className="text-xs text-gray-600 hover:text-[#0078d4] hover:underline">{item}</a>
-                  </li>
-                ))}
-              </ul>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          <div className="space-y-6">
+            <Link to="/" className="flex items-center gap-2">
+              <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-[#0078d4] text-white font-bold text-2xl">
+                Y
+              </div>
+              <span className="text-2xl font-bold tracking-tight text-white">YDGROUPS</span>
+            </Link>
+            <p className="text-sm leading-relaxed text-gray-400">
+              End-to-end IT solutions for scalable business growth. From strategy to implementation, we deliver high-performance digital, cloud, and enterprise solutions.
+            </p>
+            <div className="flex items-center gap-4">
+              <Facebook className="h-5 w-5 hover:text-[#0078d4] cursor-pointer transition-colors" />
+              <Twitter className="h-5 w-5 hover:text-[#0078d4] cursor-pointer transition-colors" />
+              <Linkedin className="h-5 w-5 hover:text-[#0078d4] cursor-pointer transition-colors" />
+              <Youtube className="h-5 w-5 hover:text-[#0078d4] cursor-pointer transition-colors" />
             </div>
-          ))}
+          </div>
+
+          <div>
+            <h4 className="text-white font-bold mb-6">Our Services</h4>
+            <ul className="grid grid-cols-1 gap-3">
+              {serviceLinks.map((link) => (
+                <li key={link.name}>
+                  <Link to={link.path} className="text-sm hover:text-[#0078d4] transition-colors">{link.name}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-white font-bold mb-6">Company</h4>
+            <ul className="space-y-3">
+              {companyLinks.map((link) => (
+                <li key={link.name}>
+                  <a href={link.path} className="text-sm hover:text-[#0078d4] transition-colors">{link.name}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-white font-bold mb-6">Contact Info</h4>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3 text-sm">
+                <MapPin className="h-5 w-5 text-[#0078d4] shrink-0" />
+                <span>123 Enterprise Way, Tech City, TC 56789</span>
+              </li>
+              <li className="flex items-center gap-3 text-sm">
+                <Phone className="h-5 w-5 text-[#0078d4] shrink-0" />
+                <span>+1 (555) 123-4567</span>
+              </li>
+              <li className="flex items-center gap-3 text-sm">
+                <Mail className="h-5 w-5 text-[#0078d4] shrink-0" />
+                <span>contact@ydgroups.com</span>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-gray-300 gap-6">
+        <div className="pt-8 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-gray-500">
           <div className="flex items-center gap-6">
-            <button className="flex items-center gap-2 text-xs text-gray-600 hover:text-[#0078d4]">
-              <Globe className="h-4 w-4" />
-              English (India)
-            </button>
-            <div className="flex items-center gap-4">
-              <Facebook className="h-4 w-4 text-gray-500 cursor-pointer hover:text-[#0078d4]" />
-              <Twitter className="h-4 w-4 text-gray-500 cursor-pointer hover:text-[#0078d4]" />
-              <Linkedin className="h-4 w-4 text-gray-500 cursor-pointer hover:text-[#0078d4]" />
-              <Youtube className="h-4 w-4 text-gray-500 cursor-pointer hover:text-[#0078d4]" />
-            </div>
+            <span>© 2024 YDGROUPS. All rights reserved.</span>
+            <a href="#" className="hover:text-white">Privacy Policy</a>
+            <a href="#" className="hover:text-white">Terms of Service</a>
           </div>
-          
-          <div className="flex flex-wrap justify-center gap-4 text-[10px] text-gray-500">
-            <a href="#" className="hover:underline">Contact Microsoft</a>
-            <a href="#" className="hover:underline">Privacy</a>
-            <a href="#" className="hover:underline">Terms of use</a>
-            <a href="#" className="hover:underline">Trademarks</a>
-            <a href="#" className="hover:underline">About our ads</a>
-            <span>© Microsoft 2024</span>
-          </div>
+          <button className="flex items-center gap-2 hover:text-white">
+            <Globe className="h-4 w-4" />
+            English (Global)
+          </button>
         </div>
       </div>
-      
-      {/* Chat with sales sticky button */}
-      <button className="fixed bottom-6 right-6 bg-[#0078d4] text-white px-6 py-3 rounded-full shadow-lg flex items-center gap-2 font-semibold hover:bg-[#005a9e] transition-colors z-50">
-        <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
-        </svg>
-        Chat with sales
-      </button>
     </footer>
   );
 }
