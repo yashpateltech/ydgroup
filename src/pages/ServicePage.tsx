@@ -19,6 +19,7 @@ import {
   BarChart3
 } from "lucide-react";
 import ContactForm from "../components/ContactForm";
+import { Helmet } from "react-helmet-async";
 
 const serviceData: Record<string, any> = {
   "digital-marketing": {
@@ -155,6 +156,11 @@ export default function ServicePage() {
 
   return (
     <div className="flex flex-col">
+      <Helmet>
+        <title>{service.title} | YD Groups - Enterprise IT Solutions</title>
+        <meta name="description" content={`${service.title} services by YD Groups. ${service.valueProp}`} />
+        <meta name="keywords" content={`${service.title}, IT Services, YD Groups, Business Growth, Consulting`} />
+      </Helmet>
       {/* Service Hero */}
       <section className="relative py-24 bg-gray-900 text-white overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
