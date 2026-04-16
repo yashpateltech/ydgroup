@@ -8,6 +8,10 @@ import Home from "./pages/Home";
 import ServicePage from "./pages/ServicePage";
 import CountryPage from "./pages/CountryPage";
 import CityPage from "./pages/CityPage";
+import About from "./pages/About";
+import Process from "./pages/Process";
+import Blog from "./pages/Blog";
+import Contact from "./pages/Contact";
 
 export default function App() {
   const { pathname, hash } = useLocation();
@@ -31,6 +35,10 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/process" element={<Process />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/services/:id" element={<ServicePage />} />
           <Route path="/seo/:country" element={<CountryPage />} />
           <Route path="/seo/:country/:city" element={<CityPage />} />

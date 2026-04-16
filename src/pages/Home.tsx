@@ -35,6 +35,13 @@ import SchemaMarkup from "../components/SchemaMarkup";
 export default function Home() {
   const [activeAccordion, setActiveAccordion] = useState<number | null>(0);
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -57,10 +64,10 @@ export default function Home() {
   const topServices = [
     { title: "Website SEO Health Check", icon: CheckCircle2, desc: "Our in-depth technical SEO audits uncover and resolve hidden issues that may impact your website's search performance, ensuring seamless crawlability, indexability, and an enhanced user experience." },
     { title: "SEO Keyword Analysis", icon: ListIcon, desc: "Our in-depth keyword research services analyze and identify high-impact keywords and search terms tailored to your business, ensuring your content aligns with user intent and the latest search trends." },
-    { title: "Page-Level Optimization", icon: FileText, desc: "Our in-depth technical SEO audits uncover and resolve hidden issues that may impact your website's search performance, ensuring seamless crawlability, indexability, and an enhanced user experience." },
-    { title: "Authority Link Building", icon: LinkIcon, desc: "Our strategic link-building and outreach efforts are designed to acquire high-quality backlinks from trusted sources, strengthening your website's authority, improving search rankings, and increasing online visibility." },
-    { title: "Localized SEO Services", icon: MapPin, desc: "Our local SEO strategies boost your business's presence in local search results by optimizing listings, managing reviews, and targeting location-specific keywords to attract nearby customers and increase foot traffic." },
-    { title: "Content & SEO Writing", icon: EditIcon, desc: "Our content and SEO writing services create engaging, keyword-optimized content that boosts visibility and drives traffic. We craft compelling copy that resonates with your audience while enhancing search rankings." }
+    { title: "Page-Level Optimization", icon: FileText, desc: "We optimize individual web pages to rank higher and earn more relevant traffic in search engines, focusing on content, HTML tags, and image optimization." },
+    { title: "Authority Link Building", icon: LinkIcon, desc: "Our strategic link-building and outreach efforts are designed to acquire high-quality backlinks from trusted sources, strengthening your website's authority and search rankings." },
+    { title: "Localized SEO Services", icon: MapPin, desc: "Our local SEO strategies boost your business's presence in local search results by optimizing listings and targeting location-specific keywords to attract nearby customers." },
+    { title: "Content & SEO Writing", icon: EditIcon, desc: "Our content and SEO writing services create engaging, keyword-optimized content that resonates with your audience while enhancing search rankings." }
   ];
 
   const processSteps = [
@@ -75,15 +82,14 @@ export default function Home() {
   const whyChoose = [
     { title: "Skilled & Experienced Team", content: "With 15+ years of industry experience, our seasoned SEO professionals deliver unmatched knowledge and expertise to every project." },
     { title: "Personalized Solutions", content: "We provide tailored SEO strategies designed to meet your specific business goals and drive measurable results." },
-    { title: "Honest & Transparent Approach", content: "We believe in clear communication and honest reporting, keeping you informed every step of the way." },
     { title: "Honest & Transparent Approach", content: "We believe in clear communication and honest reporting, keeping you informed every step of the way." }
   ];
 
   const caseStudies = [
-    { title: "Enhancing Brand Engagement with Influencer Collaborations", category: "SEO Optimization", image: "https://picsum.photos/seed/case1/600/400" },
-    { title: "Optimizing ROI with Precision-Targeted Social Media Ads", category: "SEO Optimization", image: "https://picsum.photos/seed/case2/600/400" },
-    { title: "Revolutionizing Customer Service Through Social Media", category: "SEO Optimization", image: "https://picsum.photos/seed/case3/600/400" },
-    { title: "Elevating Brand Engagement with Influencer Collaborations", category: "SEO Optimization", image: "https://picsum.photos/seed/case4/600/400" }
+    { title: "E-commerce Growth Strategy", category: "SEO Optimization", image: "https://picsum.photos/seed/ecommerce/600/400" },
+    { title: "SaaS Market Dominance", category: "GEO & AEO", image: "https://picsum.photos/seed/saas/600/400" },
+    { title: "Local Business Visibility", category: "Local SEO", image: "https://picsum.photos/seed/local/600/400" },
+    { title: "Financial Sector Authority", category: "Technical SEO", image: "https://picsum.photos/seed/finance/600/400" }
   ];
 
   const testimonials = [
@@ -126,10 +132,17 @@ export default function Home() {
               Boost your website's visibility with expert SEO solutions. We optimize rankings, enhance organic reach, and drive traffic through keyword research, content optimization, and technical SEO. Elevate your online presence and outperform the competition today!
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button className="bg-[#d9ff00] hover:bg-[#c4e600] text-black font-bold px-8 py-6 text-lg rounded-full flex items-center gap-2 transition-all">
+              <Button 
+                onClick={scrollToContact}
+                className="bg-[#d9ff00] hover:bg-[#c4e600] text-black font-bold px-8 py-6 text-lg rounded-full flex items-center gap-2 transition-all"
+              >
                 Get Quote <ArrowRight className="h-5 w-5" />
               </Button>
-              <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 font-bold px-8 py-6 text-lg rounded-full flex items-center gap-2 transition-all">
+              <Button 
+                onClick={scrollToContact}
+                variant="outline" 
+                className="border-white/20 text-white hover:bg-white/10 font-bold px-8 py-6 text-lg rounded-full flex items-center gap-2 transition-all"
+              >
                 Free Audit
               </Button>
             </div>
@@ -244,8 +257,11 @@ export default function Home() {
             ))}
           </div>
           <div className="mt-16">
-            <Button className="bg-[#d9ff00] hover:bg-[#c4e600] text-black font-bold px-10 py-6 text-lg rounded-full flex items-center gap-2 mx-auto">
-              Learn More Us <ArrowRight className="h-5 w-5" />
+            <Button 
+              onClick={scrollToContact}
+              className="bg-[#d9ff00] hover:bg-[#c4e600] text-black font-bold px-10 py-6 text-lg rounded-full flex items-center gap-2 mx-auto"
+            >
+              Get Free Audit <ArrowRight className="h-5 w-5" />
             </Button>
           </div>
         </div>
@@ -262,9 +278,11 @@ export default function Home() {
               Our dedicated SEO experts leverage deep industry knowledge and innovative strategies to drive real, measurable <br />
               <span className="text-[#0047ff] italic">results for our clients.</span>
             </h2>
-            <Button className="bg-[#0047ff] hover:bg-[#0036c2] text-white font-bold px-10 py-6 text-lg rounded-full flex items-center gap-2">
-              Learn More Us <ArrowRight className="h-5 w-5" />
-            </Button>
+            <Link to="/about">
+              <Button className="bg-[#0047ff] hover:bg-[#0036c2] text-white font-bold px-10 py-6 text-lg rounded-full flex items-center gap-2">
+                Learn More About Us <ArrowRight className="h-5 w-5" />
+              </Button>
+            </Link>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-4">
@@ -325,7 +343,7 @@ export default function Home() {
           <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-16 max-w-5xl mx-auto leading-tight">
             Our SEO approach is strategic, data-driven, and focused on results. Here's a <span className="text-[#0047ff] italic">glimpse into our process.</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left mb-16">
             {processSteps.map((step, i) => (
               <motion.div
                 key={i}
@@ -341,6 +359,11 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+          <Link to="/process">
+            <Button className="bg-[#0047ff] hover:bg-[#0036c2] text-white font-bold px-10 py-6 text-lg rounded-full flex items-center gap-2 mx-auto">
+              View Full Process <ArrowRight className="h-5 w-5" />
+            </Button>
+          </Link>
         </div>
       </section>
 
@@ -415,11 +438,13 @@ export default function Home() {
               Explore Our Latest News & Blog for Expert <span className="text-[#0047ff] italic">SEO Insights</span>
             </h2>
             <p className="text-gray-600 text-lg mb-10 max-w-xl">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla id dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa.
+              Stay updated with the latest trends in Search Engine Optimization, Answer Engine Optimization, and Generative Engine Optimization. Our experts share actionable insights to help you grow.
             </p>
-            <Button className="bg-[#d9ff00] hover:bg-[#c4e600] text-black font-bold px-10 py-6 text-lg rounded-full">
-              Read More
-            </Button>
+            <Link to="/blog">
+              <Button className="bg-[#d9ff00] hover:bg-[#c4e600] text-black font-bold px-10 py-6 text-lg rounded-full">
+                Visit Our Blog
+              </Button>
+            </Link>
           </div>
           <div className="space-y-8">
             {[
@@ -434,7 +459,9 @@ export default function Home() {
                 <h3 className="text-3xl font-bold text-gray-900 mb-8 group-hover:text-[#0047ff] transition-colors">
                   {post.title}
                 </h3>
-                <Button variant="outline" className="rounded-full px-8 border-gray-200">Read More</Button>
+            <Link to="/blog">
+              <Button variant="outline" className="rounded-full px-8 border-gray-200">Read More</Button>
+            </Link>
               </div>
             ))}
           </div>
@@ -442,65 +469,23 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 bg-[#0a0a0a] text-white">
-        <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-20">
-          <div>
-            <h2 className="text-4xl md:text-6xl font-bold mb-6">
-              Boost Your Rankings with <span className="text-[#d9ff00] italic">Expert SEO!</span>
-            </h2>
-            <p className="text-gray-400 text-lg mb-12">
-              Get in touch today to book a consultation or explore our services.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <div className="space-y-8">
-                <div className="flex gap-6">
-                  <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center shrink-0">
-                    <MapPin className="h-6 w-6 text-[#d9ff00]" />
-                  </div>
-                  <div>
-                    <p className="text-gray-400 text-sm mb-1">Address</p>
-                    <p className="font-bold">123 Main Street, Suite 456, Springfield, NY 10001 United States</p>
-                  </div>
-                </div>
-                <div className="flex gap-6">
-                  <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center shrink-0">
-                    <Phone className="h-6 w-6 text-[#d9ff00]" />
-                  </div>
-                  <div>
-                    <p className="text-gray-400 text-sm mb-1">Phone</p>
-                    <p className="font-bold">+91-989-8989-898</p>
-                    <p className="font-bold">+91-987-6543-210</p>
-                  </div>
-                </div>
-              </div>
-              <div className="space-y-8">
-                <div className="flex gap-6">
-                  <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center shrink-0">
-                    <Mail className="h-6 w-6 text-[#d9ff00]" />
-                  </div>
-                  <div>
-                    <p className="text-gray-400 text-sm mb-1">Email</p>
-                    <p className="font-bold">youremail.com</p>
-                    <p className="font-bold">www.yoursite.com</p>
-                  </div>
-                </div>
-                <div className="flex gap-6">
-                  <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center shrink-0">
-                    <Clock className="h-6 w-6 text-[#d9ff00]" />
-                  </div>
-                  <div>
-                    <p className="text-gray-400 text-sm mb-1">Working Hours</p>
-                    <p className="font-bold">Monday - Friday</p>
-                    <p className="font-bold">09:00am - 6:00pm</p>
-                  </div>
-                </div>
-              </div>
+      <section id="contact" className="py-24 bg-[#0a0a0a] text-white relative overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-5xl md:text-7xl font-bold mb-6">
+                Ready to <span className="text-[#d9ff00]">Grow?</span>
+              </h2>
+              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                Contact our experts today for a free SEO audit and personalized growth strategy.
+              </p>
+            </div>
+            <div className="bg-white p-10 md:p-16 rounded-[3rem] shadow-2xl">
+              <ContactForm />
             </div>
           </div>
-          <div className="bg-white p-10 rounded-[2.5rem]">
-            <ContactForm />
-          </div>
         </div>
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-[#d9ff00]/5 blur-[120px] rounded-full" />
       </section>
     </div>
   );

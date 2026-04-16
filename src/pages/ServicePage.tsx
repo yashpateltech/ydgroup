@@ -182,6 +182,13 @@ export default function ServicePage() {
     );
   }
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -224,8 +231,11 @@ export default function ServicePage() {
             >
               {service.valueProp}
             </motion.p>
-            <Button className="bg-[#0078d4] hover:bg-[#005a9e] text-white px-8 py-6 text-lg font-bold rounded-xl">
-              Get Consultation
+            <Button 
+              onClick={scrollToContact}
+              className="bg-[#0078d4] hover:bg-[#005a9e] text-white px-8 py-6 text-lg font-bold rounded-xl"
+            >
+              Get Free Consultation
             </Button>
           </div>
         </div>
@@ -382,7 +392,10 @@ export default function ServicePage() {
               <p className="text-xl text-gray-600 leading-relaxed mb-10">
                 {service.caseStudy.desc}
               </p>
-              <Button className="bg-[#0078d4] hover:bg-[#005a9e] text-white px-8 py-6 text-lg font-bold rounded-xl">
+              <Button 
+                onClick={scrollToContact}
+                className="bg-[#0078d4] hover:bg-[#005a9e] text-white px-8 py-6 text-lg font-bold rounded-xl"
+              >
                 View Full Case Study
               </Button>
             </div>

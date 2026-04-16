@@ -75,6 +75,13 @@ export default function CountryPage() {
     );
   }
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -116,7 +123,10 @@ export default function CountryPage() {
               {data.heroDesc}
             </motion.p>
             <div className="flex flex-wrap gap-4">
-              <Button className="bg-[#d9ff00] hover:bg-[#c4e600] text-black font-bold px-8 py-6 text-lg rounded-full">
+              <Button 
+                onClick={scrollToContact}
+                className="bg-[#d9ff00] hover:bg-[#c4e600] text-black font-bold px-8 py-6 text-lg rounded-full"
+              >
                 Get Free Audit in {data.name}
               </Button>
             </div>

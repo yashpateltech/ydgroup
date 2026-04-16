@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
 
@@ -17,24 +17,48 @@ export default function ContactForm({ serviceDefault = "" }: ContactFormProps) {
     message: ""
   });
 
+  useEffect(() => {
+    if (serviceDefault) {
+      setFormData(prev => ({ ...prev, service: serviceDefault }));
+    }
+  }, [serviceDefault]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("https://formsubmit.co/ajax/yashpatelseo19@gmail.com", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          ...formData,
+          _subject: `New Inquiry: ${formData.service} - Budget: $${formData.budget.toLocaleString()}`,
+          _template: "table",
+          _captcha: "false"
+        })
       });
 
       if (response.ok) {
         setStatus("success");
-        setFormData({ name: "", email: "", phone: "", service: serviceDefault, message: "" });
+        setFormData({ 
+          name: "", 
+          email: "", 
+          phone: "", 
+          service: serviceDefault, 
+          budget: 3000,
+          message: "" 
+        });
       } else {
+        const errorData = await response.json();
+        console.error("Form submission error:", errorData);
         setStatus("error");
       }
     } catch (err) {
+      console.error("Fetch error:", err);
       setStatus("error");
     }
   };
@@ -67,7 +91,7 @@ export default function ContactForm({ serviceDefault = "" }: ContactFormProps) {
               <input
                 required
                 type="text"
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#0078d4] focus:border-transparent outline-none transition-all"
+                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#0078d4] focus:border-transparent outline-none transition-all text-black"
                 placeholder="John Doe"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -78,7 +102,7 @@ export default function ContactForm({ serviceDefault = "" }: ContactFormProps) {
               <input
                 required
                 type="email"
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#0078d4] focus:border-transparent outline-none transition-all"
+                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#0078d4] focus:border-transparent outline-none transition-all text-black"
                 placeholder="john@example.com"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -90,7 +114,7 @@ export default function ContactForm({ serviceDefault = "" }: ContactFormProps) {
               <label className="text-sm font-semibold text-gray-700">Phone Number</label>
               <input
                 type="tel"
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#0078d4] focus:border-transparent outline-none transition-all"
+                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#0078d4] focus:border-transparent outline-none transition-all text-black"
                 placeholder="+1 (555) 000-0000"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -99,11 +123,14 @@ export default function ContactForm({ serviceDefault = "" }: ContactFormProps) {
             <div className="space-y-2">
               <label className="text-sm font-semibold text-gray-700">Service Interested</label>
               <select
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#0078d4] focus:border-transparent outline-none transition-all appearance-none bg-white"
+                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#0078d4] focus:border-transparent outline-none transition-all appearance-none bg-white text-black"
                 value={formData.service}
                 onChange={(e) => setFormData({ ...formData, service: e.target.value })}
               >
                 <option value="">Select a service</option>
+                {serviceDefault && !["Digital Marketing", "AI & Machine Learning", "SEO Services", "Web Design", "Software Development", "ERP Solutions", "CRM Solutions", "Microsoft Cloud", "SharePoint"].includes(serviceDefault) && (
+                  <option value={serviceDefault}>{serviceDefault}</option>
+                )}
                 <option value="Digital Marketing">Digital Marketing</option>
                 <option value="AI & Machine Learning">AI & Machine Learning</option>
                 <option value="SEO Services">SEO Services</option>
@@ -143,7 +170,7 @@ export default function ContactForm({ serviceDefault = "" }: ContactFormProps) {
             <textarea
               required
               rows={4}
-              className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#0078d4] focus:border-transparent outline-none transition-all resize-none"
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-[#0078d4] focus:border-transparent outline-none transition-all resize-none text-black"
               placeholder="How can we help you?"
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}

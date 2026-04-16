@@ -83,9 +83,10 @@ export default function Navbar() {
             )}
           </div>
 
-          <a href="/#about" className="hover:text-[#0047ff] transition-colors">About</a>
-          <a href="/#process" className="hover:text-[#0047ff] transition-colors">Process</a>
-          <a href="/#contact" className="hover:text-[#0047ff] transition-colors">Contact</a>
+          <Link to="/about" className="hover:text-[#0047ff] transition-colors">About</Link>
+          <Link to="/process" className="hover:text-[#0047ff] transition-colors">Process</Link>
+          <Link to="/blog" className="hover:text-[#0047ff] transition-colors">Blog</Link>
+          <Link to="/contact" className="hover:text-[#0047ff] transition-colors">Contact</Link>
         </div>
 
         <div className="flex items-center gap-4">
@@ -120,8 +121,10 @@ export default function Navbar() {
             ))}
           </div>
 
-          <a href="/#about" className="block text-lg font-bold text-gray-900" onClick={() => setIsMenuOpen(false)}>About</a>
-          <a href="/#contact" className="block text-lg font-bold text-gray-900" onClick={() => setIsMenuOpen(false)}>Contact</a>
+          <Link to="/about" className="block text-lg font-bold text-gray-900" onClick={() => setIsMenuOpen(false)}>About</Link>
+          <Link to="/process" className="block text-lg font-bold text-gray-900" onClick={() => setIsMenuOpen(false)}>Process</Link>
+          <Link to="/blog" className="block text-lg font-bold text-gray-900" onClick={() => setIsMenuOpen(false)}>Blog</Link>
+          <Link to="/contact" className="block text-lg font-bold text-gray-900" onClick={() => setIsMenuOpen(false)}>Contact</Link>
           <Button className="w-full bg-black text-white font-bold rounded-full py-6">Get Free Audit</Button>
         </div>
       )}
