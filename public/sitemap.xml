@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/</loc><priority>1.0</priority></url>
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/services/seo</loc><priority>0.9</priority></url>
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/services/aeo</loc><priority>0.9</priority></url>
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/services/geo</loc><priority>0.9</priority></url>
+  
+  <!-- Country Pages -->
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/seo/india</loc><priority>0.8</priority></url>
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/seo/australia</loc><priority>0.8</priority></url>
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/seo/canada</loc><priority>0.8</priority></url>
+
+  <!-- India City Pages -->
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/seo/india/ahmedabad</loc><priority>0.7</priority></url>
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/seo/india/mumbai</loc><priority>0.7</priority></url>
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/seo/india/delhi</loc><priority>0.7</priority></url>
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/seo/india/bangalore</loc><priority>0.7</priority></url>
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/seo/india/surat</loc><priority>0.7</priority></url>
+
+  <!-- Australia City Pages -->
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/seo/australia/sydney</loc><priority>0.7</priority></url>
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/seo/australia/melbourne</loc><priority>0.7</priority></url>
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/seo/australia/brisbane</loc><priority>0.7</priority></url>
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/seo/australia/perth</loc><priority>0.7</priority></url>
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/seo/australia/adelaide</loc><priority>0.7</priority></url>
+
+  <!-- Canada City Pages -->
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/seo/canada/toronto</loc><priority>0.7</priority></url>
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/seo/canada/vancouver</loc><priority>0.7</priority></url>
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/seo/canada/calgary</loc><priority>0.7</priority></url>
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/seo/canada/ottawa</loc><priority>0.7</priority></url>
+  <url><loc>https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/seo/canada/montreal</loc><priority>0.7</priority></url>
+</urlset>

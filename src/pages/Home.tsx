@@ -30,9 +30,29 @@ import { Link } from "react-router-dom";
 import ContactForm from "../components/ContactForm";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import SchemaMarkup from "../components/SchemaMarkup";
 
 export default function Home() {
   const [activeAccordion, setActiveAccordion] = useState<number | null>(0);
+
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "YD Groups",
+    "url": "https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/",
+    "logo": "https://ais-dev-bxswbocnfoom3rdatois46-628900592895.asia-southeast1.run.app/logo.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91-989-8989-898",
+      "contactType": "customer service",
+      "email": "yashpatelseo19@gmail.com"
+    },
+    "sameAs": [
+      "https://www.facebook.com/ydgroups",
+      "https://www.twitter.com/ydgroups",
+      "https://www.linkedin.com/company/ydgroups"
+    ]
+  };
 
   const topServices = [
     { title: "Website SEO Health Check", icon: CheckCircle2, desc: "Our in-depth technical SEO audits uncover and resolve hidden issues that may impact your website's search performance, ensuring seamless crawlability, indexability, and an enhanced user experience." },
@@ -89,6 +109,7 @@ export default function Home() {
         <meta name="description" content="YD Groups offers expert SEO, Digital Marketing, AI/ML, and Enterprise Cloud Solutions. Scale your business with our data-driven IT services." />
         <meta name="keywords" content="IT Services, SEO Solutions, Digital Marketing, AI Machine Learning, Cloud Infrastructure, YD Groups" />
       </Helmet>
+      <SchemaMarkup data={organizationSchema} />
       {/* Hero Section */}
       <section className="relative min-h-[80vh] flex items-center bg-[#0a0a0a] text-white overflow-hidden py-20">
         <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
@@ -104,9 +125,14 @@ export default function Home() {
             <p className="text-gray-400 text-lg mb-10 max-w-xl">
               Boost your website's visibility with expert SEO solutions. We optimize rankings, enhance organic reach, and drive traffic through keyword research, content optimization, and technical SEO. Elevate your online presence and outperform the competition today!
             </p>
-            <Button className="bg-[#d9ff00] hover:bg-[#c4e600] text-black font-bold px-8 py-6 text-lg rounded-full flex items-center gap-2 transition-all">
-              Get Started <ArrowRight className="h-5 w-5" />
-            </Button>
+            <div className="flex flex-wrap gap-4">
+              <Button className="bg-[#d9ff00] hover:bg-[#c4e600] text-black font-bold px-8 py-6 text-lg rounded-full flex items-center gap-2 transition-all">
+                Get Quote <ArrowRight className="h-5 w-5" />
+              </Button>
+              <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 font-bold px-8 py-6 text-lg rounded-full flex items-center gap-2 transition-all">
+                Free Audit
+              </Button>
+            </div>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -151,6 +177,39 @@ export default function Home() {
               </div>
             ))}
           </motion.div>
+        </div>
+      </section>
+
+      {/* Global Expertise Section */}
+      <section className="py-24 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <div className="inline-block px-4 py-1 rounded-full border border-blue-200 text-blue-600 text-sm font-semibold mb-4">
+              Global Reach
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Country-Based Expertise</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">We provide localized SEO, AEO, and GEO strategies tailored to the unique market dynamics of India, Australia, and Canada.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { name: "India", flag: "🇮🇳", desc: "Dominating the diverse and rapidly growing digital landscape of the Indian market.", link: "/seo/india" },
+              { name: "Australia", flag: "🇦🇺", desc: "Helping Australian businesses scale with high-intent search and conversion strategies.", link: "/seo/australia" },
+              { name: "Canada", flag: "🇨🇦", desc: "Strategic SEO and AI-driven optimization for the competitive North American market.", link: "/seo/canada" }
+            ].map((country, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ y: -10 }}
+                className="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-xl transition-all text-center group"
+              >
+                <div className="text-6xl mb-6">{country.flag}</div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{country.name}</h3>
+                <p className="text-gray-600 mb-8">{country.desc}</p>
+                <Link to={country.link} className="inline-flex items-center gap-2 font-bold text-[#0047ff] hover:underline">
+                  Explore {country.name} <ArrowRight className="h-4 w-4" />
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -16,10 +16,12 @@ import {
   Users,
   Cloud,
   Share2,
-  BarChart3
+  BarChart3,
+  MessageSquare
 } from "lucide-react";
 import ContactForm from "../components/ContactForm";
 import { Helmet } from "react-helmet-async";
+import SchemaMarkup from "../components/SchemaMarkup";
 
 const serviceData: Record<string, any> = {
   "digital-marketing": {
@@ -138,6 +140,32 @@ const serviceData: Record<string, any> = {
       metric: "50% Faster Search",
       desc: "Developed a custom SharePoint portal for a large legal firm, improving document retrieval times significantly."
     }
+  },
+  "aeo": {
+    title: "AEO (Answer Engine Optimization)",
+    icon: MessageSquare,
+    valueProp: "Optimize for the future of search: Direct answers and voice assistants.",
+    overview: "Answer Engine Optimization (AEO) is the process of optimizing your content to be the definitive answer for user queries on platforms like Alexa, Siri, and Google Assistant. We focus on structured data and conversational content that wins the 'zero-click' search result.",
+    benefits: ["Voice Search Dominance", "Zero-Click Visibility", "Brand Authority", "Improved User Intent Matching"],
+    offerings: ["Featured Snippet Optimization", "Schema Markup Implementation", "Conversational Content Strategy", "FAQ Page Development"],
+    caseStudy: {
+      title: "Voice Search Growth",
+      metric: "300% Snippet Increase",
+      desc: "Optimized a health portal for AEO, resulting in a massive increase in featured snippets and voice search appearances."
+    }
+  },
+  "geo": {
+    title: "GEO (Generative Engine Optimization)",
+    icon: Brain,
+    valueProp: "Stay relevant in the age of AI-driven search results.",
+    overview: "Generative Engine Optimization (GEO) ensures your brand is cited and recommended by AI models like ChatGPT, Gemini, and Perplexity. We optimize your digital footprint to ensure AI engines perceive your business as a trusted authority.",
+    benefits: ["AI Model Citations", "Future-Proof Visibility", "Authority Building", "Brand Sentiment Control"],
+    offerings: ["AI Citation Optimization", "Knowledge Graph Integration", "Entity-Based SEO", "Brand Authority Signals"],
+    caseStudy: {
+      title: "AI Visibility",
+      metric: "85% AI Citation Rate",
+      desc: "Implemented GEO strategies for a tech startup, ensuring they are consistently cited as a top solution by major LLMs."
+    }
   }
 };
 
@@ -154,6 +182,18 @@ export default function ServicePage() {
     );
   }
 
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": service.title,
+    "provider": {
+      "@type": "Organization",
+      "name": "YD Groups"
+    },
+    "description": service.overview,
+    "areaServed": ["India", "Australia", "Canada"]
+  };
+
   return (
     <div className="flex flex-col">
       <Helmet>
@@ -161,6 +201,7 @@ export default function ServicePage() {
         <meta name="description" content={`${service.title} services by YD Groups. ${service.valueProp}`} />
         <meta name="keywords" content={`${service.title}, IT Services, YD Groups, Business Growth, Consulting`} />
       </Helmet>
+      <SchemaMarkup data={serviceSchema} />
       {/* Service Hero */}
       <section className="relative py-24 bg-gray-900 text-white overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">

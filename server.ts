@@ -17,7 +17,7 @@ async function startServer() {
 
   // API Routes
   app.post("/api/contact", async (req, res) => {
-    const { name, email, phone, service, message } = req.body;
+    const { name, email, phone, service, budget, message } = req.body;
 
     if (!name || !email || !message) {
       return res.status(400).json({ error: "Missing required fields" });
@@ -30,6 +30,7 @@ async function startServer() {
       // Since we need to send to yashpatelseo19@gmail.com, we'd normally need a password/app key.
       // We will log the attempt and return success to demonstrate the flow.
       console.log(`Inquiry received from ${name} (${email}) for ${service}`);
+      console.log(`Budget: $${budget}`);
       console.log(`Message: ${message}`);
 
       // If you have SMTP credentials, you would uncomment this:
@@ -45,8 +46,8 @@ async function startServer() {
       await transporter.sendMail({
         from: `"${name}" <${email}>`,
         to: "yashpatelseo19@gmail.com",
-        subject: `New Inquiry: ${service}`,
-        text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nService: ${service}\n\nMessage:\n${message}`
+        subject: `New Inquiry: ${service} - Budget: $${budget}`,
+        text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nService: ${service}\nBudget: $${budget}\n\nMessage:\n${message}`
       });
       */
 

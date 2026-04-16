@@ -13,6 +13,7 @@ export default function ContactForm({ serviceDefault = "" }: ContactFormProps) {
     email: "",
     phone: "",
     service: serviceDefault,
+    budget: 3000,
     message: ""
   });
 
@@ -115,6 +116,28 @@ export default function ContactForm({ serviceDefault = "" }: ContactFormProps) {
               </select>
             </div>
           </div>
+          
+          <div className="space-y-4 py-4">
+            <div className="flex justify-between items-center">
+              <label className="text-sm font-semibold text-gray-700">Monthly Marketing Budget (USD)</label>
+              <span className="text-lg font-bold text-[#0078d4]">${formData.budget.toLocaleString()}</span>
+            </div>
+            <input
+              type="range"
+              min="3000"
+              max="200000"
+              step="1000"
+              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#0078d4]"
+              value={formData.budget}
+              onChange={(e) => setFormData({ ...formData, budget: parseInt(e.target.value) })}
+            />
+            <div className="flex justify-between text-xs text-gray-400 font-medium">
+              <span>$3,000</span>
+              <span>$100,000</span>
+              <span>$200,000</span>
+            </div>
+          </div>
+
           <div className="space-y-2">
             <label className="text-sm font-semibold text-gray-700">Message *</label>
             <textarea

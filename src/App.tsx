@@ -2,8 +2,12 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Breadcrumbs from "./components/Breadcrumbs";
+import StickyCTA from "./components/StickyCTA";
 import Home from "./pages/Home";
 import ServicePage from "./pages/ServicePage";
+import CountryPage from "./pages/CountryPage";
+import CityPage from "./pages/CityPage";
 
 export default function App() {
   const { pathname, hash } = useLocation();
@@ -23,13 +27,17 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-blue-100 selection:text-blue-900">
       <Navbar />
+      <Breadcrumbs />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services/:id" element={<ServicePage />} />
+          <Route path="/seo/:country" element={<CountryPage />} />
+          <Route path="/seo/:country/:city" element={<CityPage />} />
         </Routes>
       </main>
       <Footer />
+      <StickyCTA />
     </div>
   );
 }
