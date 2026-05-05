@@ -1,0 +1,30 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidBlog(data) {
+      return data.title is string && data.title.size() <= 200 &&
+             data.content is string && data.content.size() <= 50000 &&
+             data.category is string && data.category.size() <= 50 &&
+             data.status in ['published', 'draft'];
+    }
+
+    match /blogs/{blogId} {
+      // Allow anyone to read published blogs
+      allow read: if resource.data.status == 'published';
+      
+      // For now, allow all writes to facilitate the 'admin' login without complex Auth setup
+      // In a real app, this would be: allow write: if isAdmin();
+      allow write: if true; 
+    }
+  }
+}

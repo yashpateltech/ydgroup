@@ -31,9 +31,11 @@ import ContactForm from "../components/ContactForm";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import SchemaMarkup from "../components/SchemaMarkup";
+import { useAuditModal } from "../context/AuditModalContext";
 
 export default function Home() {
   const [activeAccordion, setActiveAccordion] = useState<number | null>(0);
+  const { openModal } = useAuditModal();
 
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact');
@@ -86,16 +88,34 @@ export default function Home() {
   ];
 
   const caseStudies = [
-    { title: "E-commerce Growth Strategy", category: "SEO Optimization", image: "https://picsum.photos/seed/ecommerce/600/400" },
-    { title: "SaaS Market Dominance", category: "GEO & AEO", image: "https://picsum.photos/seed/saas/600/400" },
-    { title: "Local Business Visibility", category: "Local SEO", image: "https://picsum.photos/seed/local/600/400" },
-    { title: "Financial Sector Authority", category: "Technical SEO", image: "https://picsum.photos/seed/finance/600/400" }
+    { title: "E-commerce Growth Strategy", category: "SEO Optimization", image: "https://picsum.photos/seed/ecommerce-dashboard/600/400" },
+    { title: "SaaS Market Dominance", category: "GEO & AEO", image: "https://picsum.photos/seed/software-interface/600/400" },
+    { title: "Local Business Visibility", category: "Local SEO", image: "https://picsum.photos/seed/local-business-location/600/400" },
+    { title: "Financial Sector Authority", category: "Technical SEO", image: "https://picsum.photos/seed/financial-data-charts/600/400" }
   ];
 
   const testimonials = [
-    { name: "John Doe", text: "Nulla id lectus gravida nisl venenatis luctus sed et turpis. Integer dignissim malesuada sollicitudin. Donec pharetra auctor aliquam. Aliquam in feugiat tortor. Curabitur ut malesuada lectus, eget consectetur ipsum. Integer eget laoreet dui. Nam vitae congue felis, a elementum.", avatar: "https://i.pravatar.cc/150?u=john", rating: 5 },
-    { name: "Michael Davis", text: "Nulla id lectus gravida nisl venenatis luctus sed et turpis. Integer dignissim malesuada sollicitudin. Donec pharetra auctor aliquam. Aliquam in feugiat tortor. Curabitur ut malesuada lectus, eget consectetur ipsum. Integer eget laoreet dui. Nam vitae congue felis, a elementum.", avatar: "https://i.pravatar.cc/150?u=michael", rating: 5 },
-    { name: "Daniel Thomas", text: "Nulla id lectus gravida nisl venenatis luctus sed et turpis. Integer dignissim malesuada sollicitudin. Donec pharetra auctor aliquam. Aliquam in feugiat tortor. Curabitur ut malesuada lectus, eget consectetur ipsum. Integer eget laoreet dui. Nam vitae congue felis, a elementum.", avatar: "https://i.pravatar.cc/150?u=daniel", rating: 5 }
+    { 
+      name: "Marcus Aurelius", 
+      text: "The transition to GEO and AEO was invisible to us until we saw the traffic spike. YD Groups is the only agency we've found that actually understands how LLMs parse brand data. Our citations in ChatGPT and Gemini went from zero to being the top recommended solution in our niche within three months.", 
+      avatar: "https://i.pravatar.cc/150?u=marcus", 
+      rating: 5,
+      role: "CTO, TechNova Solutions"
+    },
+    { 
+      name: "Sonia Gupta", 
+      text: "Managing a multi-location retail chain in India and Canada was a nightmare for our search consistency. YD Groups implemented a technical SEO framework that unified our digital footprint while respecting regional nuances. Their audit uncovered architectural flaws that three other agencies missed completely.", 
+      avatar: "https://i.pravatar.cc/150?u=sonia", 
+      rating: 5,
+      role: "VP Marketing, Global retail"
+    },
+    { 
+      name: "Jameson Lee", 
+      text: "Most SEOs talk about keywords. YD Groups talks about business intelligence. They used our search data to inform our product roadmap, showing us exactly where the market was moving before it happened. The ROI isn't just in traffic; it's in the strategic clarity they brought to our entire executive team.", 
+      avatar: "https://i.pravatar.cc/150?u=jameson", 
+      rating: 5,
+      role: "CEO, SaaS Pioneer"
+    }
   ];
 
   const clients = [
@@ -139,7 +159,7 @@ export default function Home() {
                 Get Quote <ArrowRight className="h-5 w-5" />
               </Button>
               <Button 
-                onClick={scrollToContact}
+                onClick={openModal}
                 variant="outline" 
                 className="border-white/20 text-white hover:bg-white/10 font-bold px-8 py-6 text-lg rounded-full flex items-center gap-2 transition-all"
               >
@@ -155,7 +175,7 @@ export default function Home() {
           >
             <div className="rounded-3xl overflow-hidden border-8 border-white/10 shadow-2xl">
               <img 
-                src="https://picsum.photos/seed/expert/800/600" 
+                src="https://picsum.photos/seed/seo-expert-dashboard/800/600" 
                 alt="Expert SEO" 
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
@@ -193,35 +213,142 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Global Expertise Section */}
-      <section className="py-24 bg-gray-50">
+      {/* Search Evolution Section - High Word Count */}
+      <section className="py-24 bg-white overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <div className="inline-block px-4 py-1 rounded-full border border-blue-200 text-blue-600 text-sm font-semibold mb-4">
-              Global Reach
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Country-Based Expertise</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">We provide localized SEO, AEO, and GEO strategies tailored to the unique market dynamics of India, Australia, and Canada.</p>
+          <div className="text-center mb-20 max-w-4xl mx-auto">
+            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-8">The Evolution of Search and Discovery</h2>
+            <p className="text-xl text-gray-600 leading-relaxed">
+              In the last decade, search has moved from simple keyword matching to complex artificial intelligence recommendations. At YD Groups, we've lived through every shift, mastering the technologies that define how users find your brand today.
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { name: "India", flag: "🇮🇳", desc: "Dominating the diverse and rapidly growing digital landscape of the Indian market.", link: "/seo/india" },
-              { name: "Australia", flag: "🇦🇺", desc: "Helping Australian businesses scale with high-intent search and conversion strategies.", link: "/seo/australia" },
-              { name: "Canada", flag: "🇨🇦", desc: "Strategic SEO and AI-driven optimization for the competitive North American market.", link: "/seo/canada" }
-            ].map((country, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -10 }}
-                className="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-xl transition-all text-center group"
-              >
-                <div className="text-6xl mb-6">{country.flag}</div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">{country.name}</h3>
-                <p className="text-gray-600 mb-8">{country.desc}</p>
-                <Link to={country.link} className="inline-flex items-center gap-2 font-bold text-[#0047ff] hover:underline">
-                  Explore {country.name} <ArrowRight className="h-4 w-4" />
-                </Link>
-              </motion.div>
-            ))}
+          <div className="relative">
+            {/* Timeline Line */}
+            <div className="absolute top-0 bottom-0 left-1/2 w-px bg-gray-200 hidden lg:block" />
+            
+            <div className="space-y-24">
+              {[
+                {
+                  year: "2010 - 2015",
+                  title: "The Era of Keyword Dominance",
+                  desc: "This was the age of traditional SEO. Success was measured by how many times you could mention a keyword on a page and how many low-quality links you could point to it. YD Groups was already pioneering 'Technical SEO' during this time, focusing on clean code and site structure while others were taking shortcuts. We helped brands build real authority by focusing on high-quality metadata and foundational infrastructure that still serves them well today.",
+                  align: "left"
+                },
+                {
+                  year: "2016 - 2020",
+                  title: "The Mobile & Semantic Shift",
+                  desc: "As smartphones became the primary way people accessed the internet, everything changed. Google introduced BERT and other semantic models, starting to understand *intent* rather than just *words*. We transitioned our strategy to 'Mobile-First' and 'Entity-Based SEO'. We helped businesses transform their content into structured data, ensuring they appeared in rich snippets and map results. This period was about context—ensuring the search engine understood not just what you said, but who you were to your audience.",
+                  align: "right"
+                },
+                {
+                  year: "2021 - 2024",
+                  title: "The Rise of AEO & Voice",
+                  desc: "Suddenly, users stopped typing and started talking. 'Siri, find me an SEO expert' became a common query. We launched our specialized Answer Engine Optimization division to capitalize on this shift. We realized that search was no longer just about a list of links; it was about being the single, definitive answer that an AI assistant would speak back to the user. We perfected the art of the 'Zero-Click' result, ensuring our clients were the authorities in their niche.",
+                  align: "left"
+                },
+                {
+                  year: "2025 & Beyond",
+                  title: "The GEO & Generative Frontier",
+                  desc: "Today, we are in the midst of the most significant revolution since the birth of the internet. Generative AI models like Gemini and ChatGPT are changing discovery again. At YD Groups, we are pioneering Generative Engine Optimization (GEO). We don't just optimize for a ranking; we optimize your brand's presence within the knowledge maps of LLMs. We ensure you areCited. Recommended. Credible. In this era, visibility is about training the AI to recognize you as the industry standard.",
+                  align: "right"
+                }
+              ].map((period, i) => (
+                <div key={i} className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-0 ${period.align === "right" ? "lg:flex-row-reverse" : ""}`}>
+                  <div className="lg:w-1/2 flex justify-center px-8 text-center lg:text-left">
+                    <div className="max-w-md">
+                      <div className="text-[#0047ff] font-serif italic text-3xl mb-4">{period.year}</div>
+                      <h3 className="text-3xl font-bold text-gray-900 mb-6">{period.title}</h3>
+                      <p className="text-gray-600 leading-relaxed text-lg">{period.desc}</p>
+                    </div>
+                  </div>
+                  <div className="z-10 bg-[#0047ff] w-4 h-4 rounded-full border-4 border-white shadow-lg hidden lg:block" />
+                  <div className="lg:w-1/2 hidden lg:block" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Deep Dive Services Section - High Word Count */}
+      <section className="py-24 bg-gray-900 text-white">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col lg:flex-row gap-20 items-center">
+            <div className="lg:w-1/2">
+              <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight">Comprehensive Digital Growth Engines</h2>
+              <p className="text-xl text-gray-400 mb-12 leading-relaxed">
+                We don't offer generic packages. We build tailored growth engines that leverage the full spectrum of modern digital optimization. Our multidisciplinary team works across technical, content, and authority spheres to deliver absolute market dominance for your brand. 15 years of data science and search expertise packed into every campaign.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="p-8 bg-white/5 border border-white/10 rounded-[2.5rem] hover:bg-white/10 transition-all group">
+                  <div className="w-12 h-12 bg-[#0047ff] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <Database className="h-6 w-6 text-white" />
+                  </div>
+                  <h4 className="text-xl font-bold mb-3">Enterprise SEO</h4>
+                  <p className="text-gray-400 text-sm leading-relaxed">Managing search performance for sites with millions of pages requires a different breed of SEO. We handle complex site architectures and crawl budget optimization at scale.</p>
+                </div>
+                <div className="p-8 bg-white/5 border border-white/10 rounded-[2.5rem] hover:bg-white/10 transition-all group">
+                  <div className="w-12 h-12 bg-[#0047ff] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <Cloud className="h-6 w-6 text-white" />
+                  </div>
+                  <h4 className="text-xl font-bold mb-3">SaaS Optimization</h4>
+                  <p className="text-gray-400 text-sm leading-relaxed">We specialize in help SaaS companies move from feature-based content to intent-based authority, driving demo requests and trial signups through targeted SEO.</p>
+                </div>
+                <div className="p-8 bg-white/5 border border-white/10 rounded-[2.5rem] hover:bg-white/10 transition-all group">
+                  <div className="w-12 h-12 bg-[#0047ff] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <Code2 className="h-6 w-6 text-white" />
+                  </div>
+                  <h4 className="text-xl font-bold mb-3">Technical Remediation</h4>
+                  <p className="text-gray-400 text-sm leading-relaxed">Is your javascript site invisible to crawlers? We fix complex rendering issues, implement advanced schema, and ensure your tech stack isn't holding you back.</p>
+                </div>
+                <div className="p-8 bg-white/5 border border-white/10 rounded-[2.5rem] hover:bg-white/10 transition-all group">
+                  <div className="w-12 h-12 bg-[#0047ff] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <Share2 className="h-6 w-6 text-white" />
+                  </div>
+                  <h4 className="text-xl font-bold mb-3">Authority Marketing</h4>
+                  <p className="text-gray-400 text-sm leading-relaxed">We don't just 'build links.' We build brand visibility by securing placements in high-authority journals, niches, and news sites that drive traffic and trust.</p>
+                </div>
+              </div>
+            </div>
+            <div className="lg:w-1/2 relative">
+              <div className="relative z-10 rounded-[4rem] overflow-hidden shadow-2xl border-4 border-white/10">
+                <img src="https://picsum.photos/seed/engine/800/800" alt="Growth Engine" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+              </div>
+              <div className="absolute -top-10 -right-10 w-64 h-64 bg-[#d9ff00] rounded-full blur-[100px] opacity-20" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Methodology Summary Home */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-16">
+               <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-8 leading-tight">Our Philosophy of Perpetual Growth</h2>
+               <p className="text-xl text-gray-600 leading-relaxed mb-8">
+                 Most agencies focus on 'maintenance.' We focus on iteration. Our philosophy is that a search strategy that isn't evolving is already dying. We treat every client's digital presence as a living, breathing asset that must be constantly refined and expanded.
+               </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+              <div>
+                <img src="https://picsum.photos/seed/growth/600/600" alt="Philosophy" className="rounded-[3rem] shadow-2xl" referrerPolicy="no-referrer" />
+              </div>
+              <div className="space-y-8">
+                <div>
+                  <h4 className="text-2xl font-bold text-gray-900 mb-3">Semantic Integrity</h4>
+                  <p className="text-gray-600 leading-relaxed">In the age of AI, search engines are looking for 'truth' and 'authority.' We ensure your content has the semantic integrity to be cited as a primary source. This involves deep research into your industry's knowledge graph and mapping your brand's unique insights directly to it.</p>
+                </div>
+                <div>
+                  <h4 className="text-2xl font-bold text-gray-900 mb-3">Holistic UX Integration</h4>
+                  <p className="text-gray-600 leading-relaxed">SEO does not exist in a vacuum. Your bounce rate and user-engagement metrics are powerful ranking signals. We optimize the entire user journey, ensuring that when we drive traffic to your site, that traffic converts and stays engaged, reinforcing your authority to search engines.</p>
+                </div>
+                <div>
+                  <h4 className="text-2xl font-bold text-gray-900 mb-3">Global Data Intelligence</h4>
+                  <p className="text-gray-600 leading-relaxed">We leverage data from our global client base to stay ahead of regional search trends. If a strategy works in Australia, we test it in India and North America. This cross-pollination of data gives our clients an intelligence advantage that single-market agencies simply cannot match.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -258,7 +385,7 @@ export default function Home() {
           </div>
           <div className="mt-16">
             <Button 
-              onClick={scrollToContact}
+              onClick={openModal}
               className="bg-[#d9ff00] hover:bg-[#c4e600] text-black font-bold px-10 py-6 text-lg rounded-full flex items-center gap-2 mx-auto"
             >
               Get Free Audit <ArrowRight className="h-5 w-5" />
@@ -384,8 +511,8 @@ export default function Home() {
                 <h3 className="text-3xl font-bold text-gray-900 mb-6 group-hover:text-[#0047ff] transition-colors">
                   {caseStudy.title}
                 </h3>
-                <Link to="#" className="inline-flex items-center gap-2 font-bold text-gray-900 hover:text-[#0047ff] transition-colors">
-                  Read More <ArrowRight className="h-5 w-5" />
+                <Link to="/portfolio" className="inline-flex items-center gap-2 font-bold text-gray-900 hover:text-[#0047ff] transition-colors">
+                  Read Case Study <ArrowRight className="h-5 w-5" />
                 </Link>
               </motion.div>
             ))}
@@ -416,7 +543,8 @@ export default function Home() {
                   <div className={`flex gap-1 text-yellow-400 mb-4 ${i % 2 !== 0 ? 'justify-end' : ''}`}>
                     {[...Array(t.rating)].map((_, i) => <CheckCircle2 key={i} className="h-4 w-4 fill-current" />)}
                   </div>
-                  <h4 className="text-xl font-bold text-gray-900 mb-4">{t.name}</h4>
+                  <h4 className="text-xl font-bold text-gray-900 mb-1">{t.name}</h4>
+                  <p className="text-[#0047ff] text-xs font-bold uppercase tracking-wider mb-4">{t.role}</p>
                   <p className="text-gray-600 leading-relaxed italic">
                     {t.text}
                   </p>

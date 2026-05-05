@@ -12,9 +12,17 @@ import About from "./pages/About";
 import Process from "./pages/Process";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
+import Admin from "./pages/Admin";
+import Store from "./pages/Store";
+import Portfolio from "./pages/Portfolio";
+import { AuditModalProvider, useAuditModal } from "./context/AuditModalContext";
+import AuditModal from "./components/AuditModal";
 
-export default function App() {
+function AppContent() {
   const { pathname, hash } = useLocation();
+  const { isOpen, closeModal } = useAuditModal();
+
+  const isAdminPage = pathname.startsWith("/admin");
 
   // Handle scroll to top or hash on route change
   useEffect(() => {
@@ -30,8 +38,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-blue-100 selection:text-blue-900">
-      <Navbar />
-      <Breadcrumbs />
+      {!isAdminPage && <Navbar />}
+      {!isAdminPage && <Breadcrumbs />}
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -42,10 +50,22 @@ export default function App() {
           <Route path="/services/:id" element={<ServicePage />} />
           <Route path="/seo/:country" element={<CountryPage />} />
           <Route path="/seo/:country/:city" element={<CityPage />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/store" element={<Store />} />
+          <Route path="/portfolio" element={<Portfolio />} />
         </Routes>
       </main>
-      <Footer />
-      <StickyCTA />
+      {!isAdminPage && <Footer />}
+      {!isAdminPage && <StickyCTA />}
+      <AuditModal isOpen={isOpen} onClose={closeModal} />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <AuditModalProvider>
+      <AppContent />
+    </AuditModalProvider>
   );
 }

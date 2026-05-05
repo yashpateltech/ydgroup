@@ -2,11 +2,13 @@ import { Link } from "react-router-dom";
 import { Search, User, Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useAuditModal } from "../context/AuditModalContext";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSeoDropdownOpen, setIsSeoDropdownOpen] = useState(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+  const { openModal } = useAuditModal();
 
   const seoLinks = [
     { name: "India", path: "/seo/india" },
@@ -84,13 +86,18 @@ export default function Navbar() {
           </div>
 
           <Link to="/about" className="hover:text-[#0047ff] transition-colors">About</Link>
+          <Link to="/portfolio" className="hover:text-[#0047ff] transition-colors">Portfolio</Link>
           <Link to="/process" className="hover:text-[#0047ff] transition-colors">Process</Link>
           <Link to="/blog" className="hover:text-[#0047ff] transition-colors">Blog</Link>
+          <Link to="/store" className="hover:text-[#0047ff] transition-colors font-bold text-[#0047ff]">Store</Link>
           <Link to="/contact" className="hover:text-[#0047ff] transition-colors">Contact</Link>
         </div>
 
         <div className="flex items-center gap-4">
-          <Button className="hidden md:flex bg-black hover:bg-gray-800 text-white font-bold px-8 py-2 rounded-full text-sm">
+          <Button 
+            onClick={openModal}
+            className="hidden md:flex bg-black hover:bg-gray-800 text-white font-bold px-8 py-2 rounded-full text-sm"
+          >
             Get Audit
           </Button>
           <button 
@@ -122,10 +129,17 @@ export default function Navbar() {
           </div>
 
           <Link to="/about" className="block text-lg font-bold text-gray-900" onClick={() => setIsMenuOpen(false)}>About</Link>
+          <Link to="/portfolio" className="block text-lg font-bold text-gray-900" onClick={() => setIsMenuOpen(false)}>Portfolio</Link>
           <Link to="/process" className="block text-lg font-bold text-gray-900" onClick={() => setIsMenuOpen(false)}>Process</Link>
           <Link to="/blog" className="block text-lg font-bold text-gray-900" onClick={() => setIsMenuOpen(false)}>Blog</Link>
+          <Link to="/store" className="block text-lg font-bold text-[#0047ff]" onClick={() => setIsMenuOpen(false)}>Store</Link>
           <Link to="/contact" className="block text-lg font-bold text-gray-900" onClick={() => setIsMenuOpen(false)}>Contact</Link>
-          <Button className="w-full bg-black text-white font-bold rounded-full py-6">Get Free Audit</Button>
+          <Button 
+            onClick={() => { setIsMenuOpen(false); openModal(); }}
+            className="w-full bg-black text-white font-bold rounded-full py-6"
+          >
+            Get Free Audit
+          </Button>
         </div>
       )}
     </nav>

@@ -16,19 +16,22 @@ import {
 import ContactForm from "../components/ContactForm";
 import { Helmet } from "react-helmet-async";
 import SchemaMarkup from "../components/SchemaMarkup";
+import { useAuditModal } from "../context/AuditModalContext";
 
 const countryData: Record<string, any> = {
   "india": {
     name: "India",
     flag: "🇮🇳",
     currency: "INR",
-    marketTone: "Dynamic & Diverse",
-    heroTitle: "Leading SEO, AEO & GEO Services in India",
-    heroDesc: "Empowering Indian businesses to dominate the digital landscape with data-driven optimization and AI-ready strategies.",
+    marketTone: "Dynamic, Mobile-First & Hyper-Local",
+    heroTitle: "Premium SEO, AEO & GEO Solutions for the Indian Market",
+    heroDesc: "Empowering businesses across India to dominate search results and AI engine recommendations with culturally nuanced and data-driven optimization strategies.",
     cities: ["Ahmedabad", "Mumbai", "Delhi", "Bangalore", "Surat"],
+    marketAnalysis: "The Indian digital landscape is one of the most dynamic in the world. With a 'mobile-only' population that is rapidly increasing, search behavior in India is characterized by a mix of regional languages, voice search dominance, and a high reliance on local discovery. At YD Groups, we understand that SEO in India isn't just about English keywords; it's about semantic relevance across linguistic boundaries and ensuring your brand is the top-of-mind answer for the next billion users coming online.",
+    regionalFocus: "We focus on hyper-local strategies that navigate the complex geography of India. From the thriving tech hubs of Bangalore to the industrial powerhouses of Ahmedabad and Surat, we tailor our search engines' optimization to the unique economic and cultural drivers of each city. Our AEO strategies are designed to capture voice queries in multiple Indian dialects, ensuring you are the definitive answer in every home.",
     testimonials: [
-      { name: "Rajesh Kumar", role: "CEO, TechFlow India", text: "YD Groups transformed our organic presence. Their understanding of the Indian market is unmatched.", city: "Mumbai" },
-      { name: "Priya Sharma", role: "Marketing Head, RetailHub", text: "The AEO strategy they implemented put us at the top of voice search results in weeks.", city: "Delhi" }
+      { name: "Rajesh Kumar", role: "CEO, TechFlow India", text: "YD Groups transformed our organic presence. Their understanding of the Indian market is unmatched. They helped us navigate the complexity of regional search results with ease.", city: "Mumbai" },
+      { name: "Priya Sharma", role: "Marketing Head, RetailHub", text: "The AEO strategy they implemented put us at the top of voice search results in weeks. We've seen a 300% increase in inquiries since partnering with them.", city: "Delhi" }
     ],
     trustSignals: "Trusted by 500+ Indian enterprises across E-commerce, Fintech, and Manufacturing."
   },
@@ -36,13 +39,15 @@ const countryData: Record<string, any> = {
     name: "Australia",
     flag: "🇦🇺",
     currency: "AUD",
-    marketTone: "High-Intent & Competitive",
-    heroTitle: "Premium SEO, AEO & GEO Solutions for Australian Brands",
-    heroDesc: "Scale your business across the AU market with high-performance search strategies and generative engine optimization.",
+    marketTone: "High-Intent, Sophisticated & Competitive",
+    heroTitle: "Leading SEO, AEO & GEO Services for Australian Brands",
+    heroDesc: "Scale your business across the Oceania region with high-performance search strategies and future-proof generative engine optimization.",
     cities: ["Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide"],
+    marketAnalysis: "The Australian market demands a high level of sophistication and transparency. Consumer behavior in Australia is marked by high-intent searches and a preference for brands that demonstrate clear authority and trust. Our Australian SEO strategy focuses on building 'Citadels of Authority'—interconnected hubs of content that establish your brand as a market leader. We leverage the high adoption rate of AI assistants in Australia to ensure your brand is cited in AEO and GEO environments.",
+    regionalFocus: "Whether you are targeting the high-density tech scenes of Sydney and Melbourne or the resource-driven markets of Perth and Brisbane, we bring a data-driven approach that respects the unique competitive landscape of each state. Our strategies for Australia include robust technical hardening and localized digital PR that builds the 'backlink equity' needed to rank for highly competitive terms in the AU market.",
     testimonials: [
-      { name: "Lachlan Smith", role: "Founder, AussieSaaS", text: "Incredible ROI. Their GEO services ensured our brand was the top recommendation by AI engines.", city: "Sydney" },
-      { name: "Sarah Jones", role: "Director, Coastal Real Estate", text: "Professional, transparent, and results-oriented. The best SEO agency in Australia.", city: "Melbourne" }
+      { name: "Lachlan Smith", role: "Founder, AussieSaaS", text: "Incredible ROI. Their GEO services ensured our brand was the top recommendation by AI engines. They understand the AU market better than any agency we've worked with.", city: "Sydney" },
+      { name: "Sarah Jones", role: "Director, Coastal Real Estate", text: "Professional, transparent, and results-oriented. The best SEO agency in Australia. Their reporting is clear and actually helps me make better business decisions.", city: "Melbourne" }
     ],
     trustSignals: "Partnering with leading Australian firms in Real Estate, SaaS, and Professional Services."
   },
@@ -50,13 +55,15 @@ const countryData: Record<string, any> = {
     name: "Canada",
     flag: "🇨🇦",
     currency: "CAD",
-    marketTone: "Strategic & Growth-Oriented",
-    heroTitle: "Expert SEO, AEO & GEO Services Across Canada",
-    heroDesc: "Drive sustainable growth in the Canadian market with localized SEO and future-proof AI optimization.",
+    marketTone: "Strategic, Multi-Cultural & Growth-Oriented",
+    heroTitle: "Expert SEO, AEO & GEO Solutions Across Canada",
+    heroDesc: "Drive sustainable growth in the Canadian market with localized SEO, multilingual optimization, and AI-ready brand authority.",
     cities: ["Toronto", "Vancouver", "Calgary", "Ottawa", "Montreal"],
+    marketAnalysis: "Navigating the Canadian digital market requires a strategic approach that acknowledges both the proximity to the US market and the unique cultural identity of Canada. From English-speaking hubs to the francophone requirements of Quebec, our Canadian SEO strategy is multi-cultural and multi-faceted. We focus on E-E-A-T (Experience, Expertise, Authoritativeness, and Trustworthiness) signals that search engines prioritize in high-trust categories like finance, logistics, and technology.",
+    regionalFocus: "Our Canadian experts work across all provinces to provide localized search solutions. In Toronto and Vancouver, we focus on high-volume competitive niches, while in Montreal, we provide specialized French-language SEO and AEO and GEO optimization. We help Canadian brands leverage their local authority to compete on a North American scale, ensuring your business is the definitive citation for AI engines in Canada.",
     testimonials: [
-      { name: "Jean-Pierre", role: "Manager, Quebec Logistics", text: "Their technical SEO audit uncovered issues our previous agency missed. Highly recommended.", city: "Montreal" },
-      { name: "Emily Chen", role: "CEO, MapleTech", text: "The transition to GEO was seamless. We are now cited by all major AI models.", city: "Toronto" }
+      { name: "Jean-Pierre", role: "Manager, Quebec Logistics", text: "Their technical SEO audit uncovered issues our previous agency missed. Highly recommended for any Canadian business looking for real growth. Their attention to detail is remarkable.", city: "Montreal" },
+      { name: "Emily Chen", role: "CEO, MapleTech", text: "The transition to GEO was seamless. We are now cited by all major AI models, which has completely changed our lead generation funnel in the GTA.", city: "Toronto" }
     ],
     trustSignals: "Helping Canadian businesses thrive in the North American market with localized expertise."
   }
@@ -65,6 +72,7 @@ const countryData: Record<string, any> = {
 export default function CountryPage() {
   const { country } = useParams();
   const data = countryData[country?.toLowerCase() || ""];
+  const { openModal } = useAuditModal();
 
   if (!data) {
     return (
@@ -124,7 +132,7 @@ export default function CountryPage() {
             </motion.p>
             <div className="flex flex-wrap gap-4">
               <Button 
-                onClick={scrollToContact}
+                onClick={openModal}
                 className="bg-[#d9ff00] hover:bg-[#c4e600] text-black font-bold px-8 py-6 text-lg rounded-full"
               >
                 Get Free Audit in {data.name}
@@ -140,7 +148,7 @@ export default function CountryPage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Core Optimization Services</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">Localized strategies for the {data.name} market.</p>
+            <p className="text-gray-600 max-w-2xl mx-auto">Localized search strategies for the {data.name} market.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -156,6 +164,33 @@ export default function CountryPage() {
                 <p className="text-gray-600 leading-relaxed">{service.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Market Deep Dive Section - High Word Count */}
+      <section className="py-24 bg-gray-50 border-y border-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div>
+                 <div className="inline-block px-3 py-1 bg-[#d9ff00] text-black text-xs font-bold rounded-full mb-6 uppercase tracking-wider">Market Analysis</div>
+                 <h2 className="text-4xl font-bold text-gray-900 mb-8 leading-tight">Understanding the {data.name} Search Ecosystem</h2>
+                 <div className="prose prose-lg text-gray-600">
+                    <p className="mb-6">{data.marketAnalysis}</p>
+                    <p>{data.regionalFocus}</p>
+                 </div>
+              </div>
+              <div className="relative">
+                <div className="rounded-[3rem] overflow-hidden shadow-2xl">
+                  <img src={`https://picsum.photos/seed/${data.name}-market-analysis/600/800`} alt={data.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                </div>
+                <div className="absolute -bottom-8 -right-8 bg-white p-8 rounded-3xl shadow-xl max-w-[240px]">
+                  <p className="text-2xl font-bold text-[#0047ff] mb-1">15+ Years</p>
+                  <p className="text-gray-500 text-sm">Experience optimizing for the {data.name} market.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

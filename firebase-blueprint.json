@@ -1,0 +1,42 @@
+{
+  "entities": {
+    "blog": {
+      "title": "Blog Post",
+      "description": "A blog post entity managed by the admin.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "The title of the blog post" },
+        "content": { "type": "string", "description": "The main text content of the blog post" },
+        "category": { "type": "string", "description": "The category of the blog post (e.g., SEO, AEO, GEO)" },
+        "imageUrl": { "type": "string", "description": "URL of the blog post image" },
+        "status": { "type": "string", "enum": ["published", "draft"], "description": "Publication status" },
+        "author": { "type": "string", "description": "Author of the post" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Last update timestamp" }
+      },
+      "required": ["title", "content", "category", "status", "createdAt"]
+    },
+    "lead": {
+      "title": "Lead",
+      "description": "A lead captured via the audit form.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "description": "Email address of the lead" },
+        "url": { "type": "string", "description": "Website URL for audit" },
+        "status": { "type": "string", "enum": ["new", "contacted", "closed"], "description": "Status of the lead" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" }
+      },
+      "required": ["email", "url", "createdAt"]
+    }
+  },
+  "firestore": {
+    "blogs": {
+      "schema": "blog",
+      "description": "Collection of blog posts"
+    },
+    "leads": {
+      "schema": "lead",
+      "description": "Collection of audit leads"
+    }
+  }
+}
