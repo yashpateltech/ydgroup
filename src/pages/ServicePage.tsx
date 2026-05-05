@@ -22,6 +22,7 @@ import {
 import ContactForm from "../components/ContactForm";
 import { Helmet } from "react-helmet-async";
 import SchemaMarkup from "../components/SchemaMarkup";
+import { useAuditModal } from "../context/AuditModalContext";
 
 const serviceData: Record<string, any> = {
   "digital-marketing": {
@@ -216,6 +217,7 @@ const serviceData: Record<string, any> = {
 export default function ServicePage() {
   const { id } = useParams();
   const service = serviceData[id || ""];
+  const { openModal } = useAuditModal();
 
   if (!service) {
     return (
@@ -276,7 +278,7 @@ export default function ServicePage() {
               {service.valueProp}
             </motion.p>
             <Button 
-              onClick={scrollToContact}
+              onClick={openModal}
               className="bg-[#0078d4] hover:bg-[#005a9e] text-white px-8 py-6 text-lg font-bold rounded-xl"
             >
               Get Free Consultation
@@ -461,7 +463,7 @@ export default function ServicePage() {
                 {service.caseStudy.desc}
               </p>
               <Button 
-                onClick={scrollToContact}
+                onClick={openModal}
                 className="bg-[#0078d4] hover:bg-[#005a9e] text-white px-8 py-6 text-lg font-bold rounded-xl"
               >
                 View Full Case Study

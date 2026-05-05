@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Globe, Facebook, Twitter, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import { Globe, Facebook, Twitter, Linkedin, Youtube, User, Lock } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -29,6 +29,10 @@ export default function Footer() {
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 text-xs">
           <p>© 2024 YD Groups. All rights reserved.</p>
           <div className="flex items-center gap-6">
+            <Link to="/admin" className="hover:text-[#d9ff00] transition-colors flex items-center gap-1.5 group">
+              <Lock className="h-3 w-3 text-gray-500 group-hover:text-[#d9ff00] transition-colors" />
+              Admin Login
+            </Link>
             <a href="#" className="hover:text-white">Privacy Policy</a>
             <a href="#" className="hover:text-white">Terms of Service</a>
             <button className="flex items-center gap-2 hover:text-white">

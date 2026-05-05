@@ -15,7 +15,8 @@ import {
   CheckCircle2, 
   AlertCircle,
   Mail as MailIcon,
-  Globe as GlobeIcon
+  Globe as GlobeIcon,
+  ShoppingBag as ShoppingBagIcon
 } from 'lucide-react';
 import { db } from '@/lib/firebase';
 import { 
@@ -52,15 +53,26 @@ interface Lead {
   createdAt: any;
 }
 
+interface Order {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  service: string;
+  status: string;
+  createdAt: any;
+}
+
 export default function Admin() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [activeTab, setActiveTab] = useState<'blogs' | 'leads'>('blogs');
+  const [activeTab, setActiveTab] = useState<'blogs' | 'leads' | 'orders'>('blogs');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
 
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [leads, setLeads] = useState<Lead[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentBlog, setCurrentBlog] = useState<Partial<BlogPost> | null>(null);
@@ -85,7 +97,7 @@ export default function Admin() {
 
   const fetchData = async () => {
     setIsLoading(true);
-    await Promise.all([fetchBlogs(), fetchLeads()]);
+    await Promise.all([fetchBlogs(), fetchLeads(), fetchOrders()]);
     setIsLoading(false);
   };
 
@@ -131,8 +143,22 @@ export default function Admin() {
       })) as Lead[];
       setLeads(fetchedLeads);
     } catch (error) {
-      // leads might fail if index isn't ready or permissions, handle gracefully
       console.warn("Could not fetch leads:", error);
+    }
+  };
+
+  const fetchOrders = async () => {
+    const path = 'orders';
+    try {
+      const q = query(collection(db, path), orderBy('createdAt', 'desc'));
+      const querySnapshot = await getDocs(q);
+      const fetchedOrders = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      })) as Order[];
+      setOrders(fetchedOrders);
+    } catch (error) {
+      console.warn("Could not fetch orders:", error);
     }
   };
 
@@ -177,6 +203,17 @@ export default function Admin() {
     try {
       await deleteDoc(doc(db, path, id));
       fetchLeads();
+    } catch (error) {
+      handleFirestoreError(error, OperationType.DELETE, path);
+    }
+  };
+
+  const handleDeleteOrder = async (id: string) => {
+    if (!window.confirm('Delete this order?')) return;
+    const path = 'orders';
+    try {
+      await deleteDoc(doc(db, path, id));
+      fetchOrders();
     } catch (error) {
       handleFirestoreError(error, OperationType.DELETE, path);
     }
@@ -316,6 +353,15 @@ export default function Admin() {
                 <span className="ml-2 bg-red-500 text-white text-[10px] px-2 py-0.5 rounded-full">{leads.length}</span>
               )}
             </button>
+            <button 
+              onClick={() => setActiveTab('orders')}
+              className={`px-8 py-4 rounded-xl font-bold transition-all ${activeTab === 'orders' ? 'bg-[#0047ff] text-white shadow-lg' : 'text-gray-400 hover:text-gray-600'}`}
+            >
+              Orders
+              {orders.length > 0 && (
+                <span className="ml-2 bg-[#d9ff00] text-black text-[10px] px-2 py-0.5 rounded-full">{orders.length}</span>
+              )}
+            </button>
           </div>
           {activeTab === 'blogs' && (
             <Button 
@@ -394,7 +440,7 @@ export default function Admin() {
               ))
             )}
           </div>
-        ) : (
+        ) : activeTab === 'leads' ? (
           <div className="grid grid-cols-1 gap-6">
             {isLoading ? (
                [...Array(3)].map((_, i) => (
@@ -436,6 +482,65 @@ export default function Admin() {
                       </p>
                       <button 
                         onClick={() => handleDeleteLead(lead.id)}
+                        className="p-3 bg-red-50 text-red-500 hover:bg-red-500 hover:text-white rounded-xl transition-all"
+                      >
+                        <Trash2 className="h-5 w-5" />
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))
+            )}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-6">
+            {isLoading ? (
+               [...Array(3)].map((_, i) => (
+                <div key={i} className="bg-white h-32 rounded-[2.5rem] animate-pulse border border-gray-100" />
+              ))
+            ) : orders.length === 0 ? (
+              <div className="py-32 text-center bg-white rounded-[3rem] border-2 border-dashed border-gray-200">
+                <ShoppingBagIcon className="h-16 w-16 text-gray-300 mx-auto mb-6" />
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">No orders yet</h3>
+                <p className="text-gray-500">Wait for your first service inquiry.</p>
+              </div>
+            ) : (
+              orders.map((order) => (
+                <motion.div 
+                  layout
+                  key={order.id}
+                  className="bg-white p-6 rounded-3xl border border-gray-100 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm hover:shadow-md transition-all"
+                >
+                  <div className="flex items-center gap-6">
+                    <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center">
+                      <ShoppingBagIcon className="h-6 w-6 text-[#0047ff]" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-0.5">Service</p>
+                      <p className="text-xl font-black text-gray-900">{order.service}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex flex-wrap items-center gap-8">
+                    <div>
+                      <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Customer</p>
+                      <p className="text-sm font-bold text-gray-900">{order.name}</p>
+                      <p className="text-xs text-gray-500">{order.email}</p>
+                    </div>
+                    <div className="h-8 w-px bg-gray-100 hidden lg:block" />
+                    <div>
+                      <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Phone</p>
+                      <p className="text-sm font-bold text-gray-900">{order.phone}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-6">
+                    <div className="text-right">
+                      <p className="text-[10px] text-gray-400 font-bold uppercase mb-1">
+                        {order.createdAt?.toDate ? order.createdAt.toDate().toLocaleString() : 'Recent'}
+                      </p>
+                      <button 
+                        onClick={() => handleDeleteOrder(order.id)}
                         className="p-3 bg-red-50 text-red-500 hover:bg-red-500 hover:text-white rounded-xl transition-all"
                       >
                         <Trash2 className="h-5 w-5" />

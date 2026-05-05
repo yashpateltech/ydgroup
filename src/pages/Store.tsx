@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Helmet } from 'react-helmet-async';
 import { 
@@ -16,6 +16,7 @@ import {
   Search
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import OrderModal from '../components/OrderModal';
 
 const storeCategories = [
   {
@@ -109,12 +110,26 @@ const storeCategories = [
 ];
 
 export default function Store() {
+  const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
+
+  const handleOrderClick = (serviceName: string) => {
+    setSelectedService(serviceName);
+    setIsOrderModalOpen(true);
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <Helmet>
         <title>Premium SEO Store | YD Groups Digital Services</title>
         <meta name="description" content="Shop premium SEO services, backlink packages, authority metrics boost, and development tools to scale your digital presence." />
       </Helmet>
+
+      <OrderModal 
+        isOpen={isOrderModalOpen} 
+        onClose={() => setIsOrderModalOpen(false)} 
+        serviceName={selectedService || ''} 
+      />
 
       {/* Hero Section */}
       <section className="relative pt-24 pb-32 overflow-hidden bg-[#0a0a0a]">
@@ -220,7 +235,10 @@ export default function Store() {
                     </div>
 
                     <div className="flex items-center gap-4 pt-8 border-t border-gray-50">
-                      <Button className="flex-grow bg-gray-900 hover:bg-[#0047ff] text-white rounded-2xl py-6 font-bold flex items-center justify-center gap-2 transition-all">
+                      <Button 
+                        onClick={() => handleOrderClick(item.name)}
+                        className="flex-grow bg-gray-900 hover:bg-[#0047ff] text-white rounded-2xl py-6 font-bold flex items-center justify-center gap-2 transition-all"
+                      >
                         <ShoppingCart className="h-4 w-4" /> Add to Order
                       </Button>
                       <button className="p-4 rounded-2xl bg-gray-50 text-gray-400 hover:text-[#0047ff] hover:bg-blue-50 transition-all">

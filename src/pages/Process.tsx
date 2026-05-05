@@ -15,9 +15,11 @@ import {
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import ContactForm from "../components/ContactForm";
+import { useAuditModal } from "../context/AuditModalContext";
 
 export default function Process() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const { openModal } = useAuditModal();
 
   const scrollToContact = () => {
     const contactSection = document.getElementById('contact');
@@ -97,7 +99,7 @@ export default function Process() {
             A transparent, data-driven, and proven system designed for scalable business growth in the modern search era.
           </motion.p>
           <Button 
-            onClick={scrollToContact}
+            onClick={openModal}
             className="bg-[#d9ff00] hover:bg-[#c4e600] text-black font-bold px-8 py-6 text-lg rounded-full"
           >
             Get Free Audit

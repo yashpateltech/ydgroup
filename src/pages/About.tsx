@@ -4,8 +4,10 @@ import { CheckCircle2, TrendingUp, Users, ShieldCheck, Globe, Zap } from "lucide
 import { Helmet } from "react-helmet-async";
 import ContactForm from "../components/ContactForm";
 import SchemaMarkup from "../components/SchemaMarkup";
+import { useAuditModal } from "../context/AuditModalContext";
 
 export default function About() {
+  const { openModal } = useAuditModal();
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -55,7 +57,7 @@ export default function About() {
               We are a results-driven digital marketing agency dedicated to scaling businesses through innovative search strategies and AI-ready optimization.
             </motion.p>
             <Button 
-              onClick={scrollToContact}
+              onClick={openModal}
               className="bg-[#d9ff00] hover:bg-[#c4e600] text-black font-bold px-8 py-6 text-lg rounded-full"
             >
               Get Free SEO Audit

@@ -27,6 +27,20 @@
         "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" }
       },
       "required": ["email", "url", "createdAt"]
+    },
+    "order": {
+      "title": "Order",
+      "description": "A service order captured via the store.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the customer" },
+        "email": { "type": "string", "description": "Email address of the customer" },
+        "phone": { "type": "string", "description": "Phone number of the customer" },
+        "service": { "type": "string", "description": "The service ordered" },
+        "status": { "type": "string", "enum": ["new", "processing", "completed"], "description": "Status of the order" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" }
+      },
+      "required": ["name", "email", "phone", "service", "createdAt"]
     }
   },
   "firestore": {
@@ -37,6 +51,10 @@
     "leads": {
       "schema": "lead",
       "description": "Collection of audit leads"
+    },
+    "orders": {
+      "schema": "order",
+      "description": "Collection of service orders"
     }
   }
 }

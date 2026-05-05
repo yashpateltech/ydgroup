@@ -15,6 +15,7 @@ import {
   Briefcase
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useAuditModal } from '../context/AuditModalContext';
 
 const caseStudies = [
   {
@@ -72,6 +73,7 @@ const growthStories = [
 ];
 
 export default function Portfolio() {
+  const { openModal } = useAuditModal();
   return (
     <div className="flex flex-col min-h-screen bg-white">
       <Helmet>
@@ -237,7 +239,10 @@ export default function Portfolio() {
              <div className="relative z-10">
                 <Briefcase className="h-12 w-12 text-[#d9ff00] mx-auto mb-8" />
                 <h2 className="text-4xl text-white font-black mb-8">Ready to be our next Success Story?</h2>
-                <Button className="bg-[#0047ff] hover:bg-[#0037cc] text-white px-12 py-8 rounded-3xl font-bold text-xl shadow-2xl shadow-blue-500/20">
+                <Button 
+                  onClick={openModal}
+                  className="bg-[#0047ff] hover:bg-[#0037cc] text-white px-12 py-8 rounded-3xl font-bold text-xl shadow-2xl shadow-blue-500/20"
+                >
                   Start Your Audit Now
                 </Button>
              </div>

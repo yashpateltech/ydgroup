@@ -20,5 +20,10 @@ service cloud.firestore {
       allow create: if true;
       allow read, update, delete: if true; // In prod, restricted to admin
     }
+
+    match /orders/{orderId} {
+      allow create: if true;
+      allow read, update, delete: if true; // In prod, restricted to admin
+    }
   }
 }
